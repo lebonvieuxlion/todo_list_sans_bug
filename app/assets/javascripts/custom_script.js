@@ -42,18 +42,23 @@ $(document).ready(() => {
 
 //----------------------- Modales de connexion/inscription-------------------------------------
 	
+	//je sélectionne les liens Login et subscribe dans la navbar et les form 
 	$formLogin = $('#form-login')
 	$formSubscribe = $('#form-subscribe')
 	$linkLogin = link.first()
 	$linkSubscribe = $linkLogin.next()
 
+	//sélectionne toute la navbar sauf l'ul 
+	$excludeFormLogin = $('.navbar-expand-lg').not($menu)
+	console.log($excludeFormLogin)
 
+	//par défaut je cache les deux forms
 	$formLogin.hide()
 	$formSubscribe.hide()
 
-	
+	//au clic sur le lien du login j'affiche le form correspondant et je cache l'autre form si besoin
 	$linkLogin.on('click', event => {
-		$formLogin.slideToggle('slow')
+		$formLogin.slideDown('slow')
 
 		var formSubscribeIsVisible = $formSubscribe.is(':visible')
 
@@ -63,6 +68,16 @@ $(document).ready(() => {
 
 	})
 
+	//fait en sorte que lorsqu'on clique sur la navbar le form se cache (ne marche pas bien)
+	/*
+	$excludeFormLogin.on('click', event => {
+		$formLogin.hide()
+		console.log('je clique pour fermer le form')
+	})
+	*/
+
+
+	//pareil que pour login
 	$linkSubscribe.on('click', event => {
 
 		$formSubscribe.slideToggle('slow')
@@ -75,6 +90,19 @@ $(document).ready(() => {
 	})
 
 
-});
+//----------------------- NAVBAR RESPONSIVE-------------------------------------
 
+//ne marche absolument pas => à voir si resize est mieux
+// https://stackoverflow.com/questions/9828831/jquery-on-window-resize
+if( $(window).width() < 800 ) {
+
+	console.log("le breakpoint marche")
+	$('')
+
+	
+}
+
+
+
+});
 
