@@ -2,10 +2,27 @@ $(document).ready(() => {
 
 	var $checkboxesWithId = $('#' + '<%= @task.id %>')
 
+	console.log($checkboxesWithId)
+
 
 		//pas besoin d'utiliser on.('click', etc..) car l'évènement s'est déjà produit. On doit juste programmer
 		// ce qui va se produire
-		$checkboxesWithId.slideUp('slow')
-	
+		//$checkboxesWithId.slideUp('slow')
+		
+		if($checkboxesWithId.hasClass("completed")){
+
+			$checkboxesWithId.css("text-decoration", "none")
+			$checkboxesWithId.removeClass("completed")
+
+
+		}
+
+		else {
+
+			$checkboxesWithId.css("text-decoration", "line-through")
+			$checkboxesWithId.addClass("completed")
+
+		}
 
 });
+

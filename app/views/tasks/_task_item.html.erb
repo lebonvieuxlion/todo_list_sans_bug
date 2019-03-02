@@ -8,4 +8,10 @@
 
             <%= check_box_tag 'status_task', 'status',false , data: {remote: true, url: task_path(task.id), method: :patch} %>
 
+          <%= link_to task_path(task.id), method: :delete, remote: true do %>
+
+            <i class="fas fa-trash-alt"></i>
+            
+          <% end %>
+
         </li>

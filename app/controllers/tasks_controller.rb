@@ -44,30 +44,22 @@ respond_to :html, :js
 
   def update
 
-=begin
-    respond_to do |format|
 
-      format.html do
-      @task = Task.find(params[:id])
-      @task.update(task_params)
-      redirect_to tasks_path
-      flash[:notice] = "Task edited"
-
-      end
-
-      format.js do
-
-      end
-
-    end
-=end 
-
-  puts "salut les jeunes"
-  puts '$' * 60
   @task = Task.find(params[:id])
-  @task.status = true
 
-    if @task.save
+  if @task.status != true
+
+    @task.status = true
+
+  else
+
+    @task.status = false
+
+  end
+
+
+  if @task.save
+
       respond_to do |format|
         format.html { redirect_to books_path }
         format.js
@@ -87,7 +79,11 @@ respond_to :html, :js
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
-    redirect_to root_path
+
+    respond_to do |format|
+      format.html { redirect_to books_path }
+      format.js
+    end
   end
 
 

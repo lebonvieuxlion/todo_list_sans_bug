@@ -1,0 +1,14 @@
+
+$(document).ready(() => {
+
+	console.log("le destroy marche")
+
+	var $checkboxesWithId = $('#' + '<%= @task.id %>')
+
+
+		//pas besoin d'utiliser on.('click', etc..) car l'évènement s'est déjà produit. On doit juste programmer
+		// ce qui va se produire
+		$checkboxesWithId.slideUp('slow')
+	
+
+});

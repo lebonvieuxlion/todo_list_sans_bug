@@ -10,21 +10,47 @@
 
       <% category.tasks.each do |task|  %>
 
+      <!-- A l'aide du statut de la tâche change le style en barrant la tâche et je check ou non la checkbox  -->
+       <% if task.status %>
 
-      <!-- Si le statut de la checkbox est à true, elle n'apparait pas-->
-      <% if task.status != true %>
+          <li id="<%= task.id %>" class="completed" style="text-decoration: line-through;" > 
+            <%= task.title  %>
+            <% unless task.deadline.nil? %>
+              , to read: <%= task.deadline.strftime('%D')  %>
+            <% end %>
 
-        <li id="<%= task.id %>" > 
-          <%= task.title  %>
-          <% unless task.deadline.nil? %>
-            , to read: <%= task.deadline.strftime('%D')  %>
-          <% end %>
+              <!---checkbox pour passer le statut de la tâche en true ou en false -->
+              <%= check_box_tag task.id , 'status', true , data: {remote: true, url: task_path(task.id), method: :patch} %>
 
-            <%= check_box_tag task.id , 'status', false , data: {remote: true, url: task_path(task.id), method: :patch} %>
+              <!---lien avec une icone pour supprimer la tâche--->
+            <%= link_to task_path(task.id), method: :delete, remote: true do %>
+              <i class="fas fa-trash-alt"></i>
+            <% end %>
+            
+          </li>
 
-        </li>
 
-      <% end %>
+       <% else %>
+
+          <li id="<%= task.id %>" > 
+            <%= task.title  %>
+            <% unless task.deadline.nil? %>
+              , to read: <%= task.deadline.strftime('%D')  %>
+            <% end %>
+
+              <!---checkbox pour passer le statut de la tâche en true ou false--->
+              <%= check_box_tag task.id , 'status', false , data: {remote: true, url: task_path(task.id), method: :patch} %>
+
+              <!---lien avec une icone pour supprimer la tâche--->
+            <%= link_to task_path(task.id), method: :delete, remote: true do %>
+              <i class="fas fa-trash-alt"></i>
+            <% end %>
+
+
+          </li>
+
+
+        <% end %>
 
       <% end %>
 
