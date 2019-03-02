@@ -1,0 +1,12 @@
+$(document).ready(() => {
+
+	var $checkboxes = $('div.container div.card ul li input')
+
+	$checkboxes.on('click', event => {
+
+		$(event.currentTarget).parents('li').slideUp('slow')
+
+
+	});
+
+});

@@ -1,5 +1,8 @@
 class TasksController < ApplicationController
 before_action :authenticate_user!
+respond_to :html, :js
+
+
   def new
     @categories = Category.all
   end
@@ -24,11 +27,42 @@ before_action :authenticate_user!
   end
 
   def update
-    @task = Task.find(params[:id])
-    @task.update(task_params)
-    redirect_to tasks_path
-    flash[:notice] = "Task edited"
+
+=begin
+    respond_to do |format|
+
+      format.html do
+      @task = Task.find(params[:id])
+      @task.update(task_params)
+      redirect_to tasks_path
+      flash[:notice] = "Task edited"
+
+      end
+
+      format.js do
+
+      end
+
+    end
+=end 
+
+  puts "salut les jeunes"
+  puts '$' * 60
+  @task = Task.find(params[:id])
+  @task.status = true
+
+    if @task.save
+      respond_to do |format|
+        format.html { redirect_to books_path }
+        format.js
+      end
+
+    end
+
+
   end
+
+
 
   def index
     @tasks = Task.all
