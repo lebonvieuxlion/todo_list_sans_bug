@@ -1,12 +1,11 @@
 $(document).ready(() => {
 
-	var $checkboxes = $('div.container div.card ul li input')
-
-	$checkboxes.on('click', event => {
-
-		$(event.currentTarget).parents('li').slideUp('slow')
+	var $checkboxesWithId = $('#' + '<%= @task.id %>')
 
 
-	});
+		//pas besoin d'utiliser on.('click', etc..) car l'évènement s'est déjà produit. On doit juste programmer
+		// ce qui va se produire
+		$checkboxesWithId.slideUp('slow')
+	
 
 });

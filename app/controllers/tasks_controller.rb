@@ -4,23 +4,39 @@ respond_to :html, :js
 
 
   def new
+
     @categories = Category.all
+
   end
+  
 
   def create
+
     @task = Task.new(task_params)
     @category = Category.find(category_params)
     @task.category = @category
+
     if @task.save
-      redirect_to root_path
-      flash[:notice] = "Task created"
+
+      respond_to do |format|
+
+        format.html {redirect_to root_path}
+        format.js
+        flash[:notice] = "Task created"       
+      end
+
     else
+
       redirect_to root_path
       flash[:notice] = "Please try again"
+
     end
+
   end
 
+
   def edit
+
     @task = Task.find(params[:id])
     @categories = Category.all
 

@@ -1,0 +1,14 @@
+$(document).ready(() => {
+
+	/*je vais chercher l'ul correspondant à la bonne catégorie grâce à la classe définie dans le html
+	et à la variable category dans le controller */
+	var $listOfTasks = $('.card ul.' + "<%= @category.id %>")
+
+	// je récupère la render de task_item en la transformant en objet Jquery pour lui appliquer des méthodes Jquery
+	var $newTask = 	$("<%= escape_javascript(render "task_item", task: @task) %>")
+
+
+	/*je fais un slide down qui apparait car dans la partial task_item l'élément li est en display none. 
+	En effet un slideDown peut seulement se produire si l'élément est déjà invisible */
+	$newTask.appendTo($listOfTasks).slideDown()
+});
